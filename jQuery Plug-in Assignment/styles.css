@@ -1,0 +1,10 @@
+#play{
+    height: 50px;
+    width: 50px;
+    position: relative;
+}
+#pause{
+    height: 50px;
+    width: 70px;
+    position: relative;
+}
