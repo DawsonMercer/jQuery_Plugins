@@ -7,8 +7,11 @@ utterance.rate = 1;
 
 
 document.getElementById('button').onclick = function(){
-    var text = document.getElementById('textarea').value;
-    var words   = text.split(" ");
+    var text = $("body").text();
+    text = $.trim(text);
+    console.log("text -"+text);
+    var words  = text.split(" ");
+    console.log("words -"+words)
     global_words = words;
     // Draw the text in a div
     drawTextInPanel(words);
@@ -26,7 +29,7 @@ utterance.onboundary = function(event){
     // Show Speaking word : x
   	document.getElementById("word").innerHTML = word;
     //Increase index of span to highlight
-    console.info(global_words[wordIndex]);
+    // console.info(global_words[wordIndex]);
     
     try{
     	document.getElementById("word_span_"+wordIndex).style.color = "blue";
@@ -63,6 +66,7 @@ function drawTextInPanel(words_array){
 console.log("Dibujado");
 		var panel = document.getElementById("panel");
   	for(var i = 0;i < words_array.length;i++){
+          console.log("words_array " + words_array[i]);
     	var html = '<span id="word_span_'+i+'">'+words_array[i]+'</span>&nbsp;';
     	panel.innerHTML += html;
     }
