@@ -36,7 +36,7 @@ utterance.onboundary = function(event){
 };
 
 utterance.onend = function(){
-	document.getElementById("word").innerHTML = "";
+	// document.getElementById("word").innerHTML = "";
     wordIndex = 0;
     //document.getElementById("panel").innerHTML = "";
 };

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body id="theBody">
+    
+    <p id="textarea" style="width:200px;height:200px;">This is a text area.  It is used as a simple test to check whether these words are highlighted as they are spoken using the web speech synthesis API (utterance).</p><br>
+    <p id="textarea2">This is the second part of the body</p><br>
+ 
+    <input type="button" id="playbtn" value="Click to speak text and show word in span !"/><br>
+    Speaking word : <span id="word" style="color:blue;"></span><br><br>
+    <div id="panel" style="min-width:300px;word-wrap:wrap;display:inline-block;">
+    
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="jsSpeech.js"></script>
+</body>
+</html>
