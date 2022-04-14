@@ -60,11 +60,4 @@ function getWordAt(str, pos) {
     return str.slice(left, right + pos);
 }
 
-function drawTextInPanel(words_array){
-// console.log("Dibujado");
-		var panel = document.getElementById("panel");
-  	for(var i = 0;i < words_array.length;i++){
-    	var html = '<span id="word_span_'+i+'">'+words_array[i]+'</span>&nbsp;';
-    	panel.innerHTML += html;
-    }
 }
