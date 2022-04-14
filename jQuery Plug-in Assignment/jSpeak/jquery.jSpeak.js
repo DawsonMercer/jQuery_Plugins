@@ -3,12 +3,14 @@
     $.fn.jSpeak = function(options){
         //TODO: add back options into option ^ removed for testing
         let settings = $.extend({
-            speed: 1,
-            backgroundColor: 'yellow'
+            voiceStyle: 0,
+            voiceSpeed: 1,
+            textColor: "yellow"
 
         },options)
 
         return this.each(function(){
+            // let $voiceStyle, $voiceSpeed, $textColor
             let count = 0;
             let clicked = 0;
             let msg = new SpeechSynthesisUtterance();
@@ -45,7 +47,7 @@
             $("#jSpeakContainer").css("border", "5px solid black").css("width", "300px");
             $("#jSpeakContainer").html(jSpeakhtml);
             // $("#jSpeakContainer").html(jSpeakSpan);
-            $("#jSpeakSpan").css("background-color", "yellow");
+            $("#jSpeakSpan").css("background-color", settings.textColor);
             // let msg;
 
             $("#actionButton").click(() =>{
@@ -60,7 +62,7 @@
 
                 }
                 else{
-                    $("#actionButton").attr("src", "image/pause.png");
+                    $("#actionButton").attr("src", "image/stop.png");
                     console.log("Voice is playing");
                     isPlaying = true;
                     
@@ -78,11 +80,16 @@
             function say(bodyWords){
                 console.log("inside say");
                 // let msg = new SpeechSynthesisUtterance();
-                // let voices = window.speechSynthesis.getVoices();
-                msg.voice = voices[10];
+                let voices = window.speechSynthesis.getVoices();
+                console.log(voices)
+                for (let v in voices){
+                    console.log(`${v} ${voices[v].name}`)
+                }
+                console.log("voce style "+ settings.voiceStyle);
+                msg.voice = voices[settings.voiceStyle];
                 msg.voiceURI = "native";
                 msg.volume = 1;
-                msg.rate = 1;
+                msg.rate = settings.voiceSpeed;
                 msg.pitch = 0.8;
                 msg.text = bodyWords;
                 msg.lang = 'en-US';
@@ -174,50 +181,7 @@
                 }
                 console.log(words);
                 let isPlaying = false;
-
-                //reseting from begining
-                // wordIndex = 0;
-                // global_words = [];
-                // bodyWords = $(this).text();
-                // // let bodyWords = $.trim($(this).text());
-                // console.log(bodyWords);
-                // words = bodyWords.split(" ");
-                // console.log(words);
-                // function arrayRemove(arr, value){
-                //     return arr.filter(function(ele){
-                //         return ele != value;
-                //     });
-                // }
-                // words = arrayRemove(words, "\n");
-                // words = arrayRemove(words, "");
-                // words = arrayRemove(words, " ");
-                // // words = $.trim(words);
-                // for (let w in words){
-                //     words[w] = words[w].replace(/(\r\n|\n|\r)/gm, "");
-                //     // console.log(w);
-                // }
-                // console.log("trim and removed below");
-                // console.log(words);
-                // isPlaying = false;
-
-                // jSpeakhtml = `<img src="image/jSpeakLogo.png"width="150px" height="75px"><img src="image/play.png" id="actionButton" width="50px" height="50px"><br>`
-                // jSpeakSpan = `<span id="jSpeakSpan" width="150px" height="75px">reFRESH Words:</span>`
-                // jSpeakhtml += jSpeakSpan;
-                // // <img src="image/pause.png" id="pauseButton">`
-                // $("#jSpeakContainer").css("border", "5px solid black").css("width", "300px");
-                // $("#jSpeakContainer").html(jSpeakhtml);
-                // // $("#jSpeakContainer").html(jSpeakSpan);
-                // $("#jSpeakSpan").css("background-color", "yellow");
-                // // let msg;
-
-
             }
-
-            
-
-
-
-
 
         })
 

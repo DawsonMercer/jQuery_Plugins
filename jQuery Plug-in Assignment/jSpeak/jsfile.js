@@ -1,5 +1,11 @@
 
 $(document).ready( ()=>{
-    $("body").jSpeak();
+
+    $("body").jSpeak({
+        // voiceStyle: 4,
+        // voiceSpeed: 2,
+        // textColor: "pink"
+    });
+
 
 });
