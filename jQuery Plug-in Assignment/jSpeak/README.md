@@ -1,6 +1,7 @@
 # jSpeak jQuery Plug-in
 
-## jSpeak allows a developer to add text-to-speech functionality to their webpage. This can be used to help people with learning disabilities, for peopple who have trouble reading the text, or just for those who wish to read along with the spoken word content. 
+## jSpeak allows a developer to add text-to-speech functionality to their webpage. 
+## This can be used to help people with learning disabilities, for peopple who have trouble reading the text on a webpage, or just for those who wish to read along with the spoken word content. 
 
 ### How to add jSpeak plug-in to your webpage
 
