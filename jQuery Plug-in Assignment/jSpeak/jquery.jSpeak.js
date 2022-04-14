@@ -18,9 +18,9 @@
             let global_words = [];
             let bodyWords = $(this).text();
             // let bodyWords = $.trim($(this).text());
-            console.log(bodyWords);
+            // console.log(bodyWords);
             let words = bodyWords.split(" ");
-            console.log(words);
+            //console.log(words);
             function arrayRemove(arr, value){
                 return arr.filter(function(ele){
                     return ele != value;
@@ -34,8 +34,8 @@
                 words[w] = words[w].replace(/(\r\n|\n|\r)/gm, "");
                 // console.log(w);
             }
-            console.log("trim and removed below");
-            console.log(words);
+            // console.log("trim and removed below");
+            // console.log(words);
             let isPlaying = false;
 
             let jSpeakhtml = `<img src="image/jSpeakLogo.png"width="150px" height="75px"><img src="image/play.png" id="actionButton" width="50px" height="50px"><br>`
@@ -94,15 +94,15 @@
             msg.onboundary = async function(event){
                 
                 let selectBody = $("body");
-                console.log("event "+ event);
-                
+                // console.log("event "+ event);
+                console.log(jSpeakSpan.textContent)
                 let word = getWordAt(global_words[wordIndex], event.charIndex);
                 //drawTextInPanel(words);
                 // document.getElementById("word").innerHTML = word;
-                console.log("word: "+ word);
+                //console.log("word: "+ word);
                 // console.log("event.charIndex "+ event.charIndex);
                 // console.info("global word index "+global_words[wordIndex]);
-                console.log("span index global "+ global_words[wordIndex]);
+                //console.log("span index global "+ global_words[wordIndex]);
                 if(global_words[wordIndex] == null){
                     console.log("UNDEFINED");
                 }else{
@@ -125,8 +125,8 @@
                 }
                 count++;
                 console.log("global words: "+ global_words.length);
-                console.log(count +"BOUNDARY");
-                console.log(wordIndex +"wordIndex");
+                // console.log(count +"BOUNDARY");
+                // console.log(wordIndex +"wordIndex");
                 // if(wordIndex == global_words.length){
                 //     document.getElementById("actionButton").click();
                 // }
@@ -153,8 +153,11 @@
             let resetEverything = () =>{
                 wordIndex = 0;
                 global_words = [];
-                $("#jSpeakSpan").html(`<span id="jSpeakSpan" width="150px" height="75px">Spoken Words:</span>`)
+                words = []
+                $("#jSpeakSpan").text("");
+                spanHTML= "";
                 bodyWords = $.trim($(this).text());
+                $("#jSpeakSpan").html(jSpeakSpan)
                 console.log(bodyWords);
                 words = bodyWords.split(" ");
                 console.log(words);
@@ -171,6 +174,43 @@
                 }
                 console.log(words);
                 let isPlaying = false;
+
+                //reseting from begining
+                // wordIndex = 0;
+                // global_words = [];
+                // bodyWords = $(this).text();
+                // // let bodyWords = $.trim($(this).text());
+                // console.log(bodyWords);
+                // words = bodyWords.split(" ");
+                // console.log(words);
+                // function arrayRemove(arr, value){
+                //     return arr.filter(function(ele){
+                //         return ele != value;
+                //     });
+                // }
+                // words = arrayRemove(words, "\n");
+                // words = arrayRemove(words, "");
+                // words = arrayRemove(words, " ");
+                // // words = $.trim(words);
+                // for (let w in words){
+                //     words[w] = words[w].replace(/(\r\n|\n|\r)/gm, "");
+                //     // console.log(w);
+                // }
+                // console.log("trim and removed below");
+                // console.log(words);
+                // isPlaying = false;
+
+                // jSpeakhtml = `<img src="image/jSpeakLogo.png"width="150px" height="75px"><img src="image/play.png" id="actionButton" width="50px" height="50px"><br>`
+                // jSpeakSpan = `<span id="jSpeakSpan" width="150px" height="75px">reFRESH Words:</span>`
+                // jSpeakhtml += jSpeakSpan;
+                // // <img src="image/pause.png" id="pauseButton">`
+                // $("#jSpeakContainer").css("border", "5px solid black").css("width", "300px");
+                // $("#jSpeakContainer").html(jSpeakhtml);
+                // // $("#jSpeakContainer").html(jSpeakSpan);
+                // $("#jSpeakSpan").css("background-color", "yellow");
+                // // let msg;
+
+
             }
 
             
