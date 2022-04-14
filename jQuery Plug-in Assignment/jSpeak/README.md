@@ -5,7 +5,7 @@
 ### How to add jSpeak plug-in to your webpage
 
 1. download the __jquery.jSpeak.js__ file and add the file name to the script section of the html page that you wish to have read aloud.
- 2. Add a __div__ at the top of your page with an id of __"jSpeakContainer"__
+ 2. Add a __div element__ at the top of your page with an id of __"jSpeakContainer"__
   3. Add the __play.png__ and __stop.png__ photos to a folder called __"image"__
   4. In your javascript file, call the __.jSpeak()__ method in order to build the jSpeak text-to-Speech plug-in and add it to your webpage.
  5. add a selector to the .jSpeak() method. We suggest you call it as such - __$("body").jSpeak()__, however you may use any elements that you wish and does not have to include all of the body text.
