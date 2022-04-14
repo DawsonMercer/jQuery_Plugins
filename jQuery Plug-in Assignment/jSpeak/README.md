@@ -11,3 +11,7 @@
   4. In your javascript file, call the __.jSpeak()__ method in order to build the jSpeak text-to-Speech plug-in and add it to your webpage. (only needs to be called once)
  5. add a selector to the .jSpeak() method. We suggest you call it as such - __$("body").jSpeak()__, however you may call any elements that you wish to have read and does not have to include all of the body text.
  6. Add optional customization __see jsfile.js for example__ - after calling .jSpeak() you may __optionally__ pass in __voiceStyle__ (index of 0,1,2,3, or 4 on windows in chrome (voices may very per machine and browser)), __voiceSpeed__ (0.1 - 2), and __textColor__ ( blue, yellow, green, pink, etc.).
+
+
+https://user-images.githubusercontent.com/93411940/163474531-5a4e349e-e853-4773-9144-f9f32a7a9e4d.mp4
+
