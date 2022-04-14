@@ -1,7 +1,7 @@
 (function($){
 
     $.fn.jSpeak = function(options){
-        //TODO: add back options into option ^ removed for testing
+        //optional customization settings of voiceStyle, voiceSpeed, textColor
         let settings = $.extend({
             voiceStyle: 0,
             voiceSpeed: 1,
@@ -10,17 +10,16 @@
         },options)
 
         return this.each(function(){
-            // let $voiceStyle, $voiceSpeed, $textColor
+            //calling upon this element that was tagged
             let count = 0;
             let clicked = 0;
             let msg = new SpeechSynthesisUtterance();
             let voices = window.speechSynthesis.getVoices();
-            // FIXME: shouldnt be minus 1 but it is
             let wordIndex = 0;
             let global_words = [];
+            //getting the text from the body
             let bodyWords = $(this).text();
-            // let bodyWords = $.trim($(this).text());
-            // console.log(bodyWords);
+            //removing characters that we do not want
             let words = bodyWords.split(" ");
             //console.log(words);
             function arrayRemove(arr, value){
@@ -36,22 +35,21 @@
                 words[w] = words[w].replace(/(\r\n|\n|\r)/gm, "");
                 // console.log(w);
             }
-            // console.log("trim and removed below");
-            // console.log(words);
+            
             let isPlaying = false;
-
-            let jSpeakhtml = `<img src="image/jSpeakLogo.png"width="150px" height="75px"><img src="image/play.png" id="actionButton" width="50px" height="50px"><br>`
+            //automatically builds the jSpeak widget so that no additional coding is required
+            let jSpeakhtml = `<img src="image/jSpeakLogo.png"width="200px" height="100px"><img src="image/play.png" id="actionButton" width="75px" height="75px"><br>`
             let jSpeakSpan = `<span id="jSpeakSpan" width="150px" height="75px">Spoken Words:</span>`
             jSpeakhtml += jSpeakSpan;
-            // <img src="image/pause.png" id="pauseButton">`
+            
             $("#jSpeakContainer").css("border", "5px solid black").css("width", "300px");
             $("#jSpeakContainer").html(jSpeakhtml);
-            // $("#jSpeakContainer").html(jSpeakSpan);
+            
             $("#jSpeakSpan").css("background-color", settings.textColor);
-            // let msg;
+            
 
+            //gets the click on the actionButton to either pause or play text-to-speech
             $("#actionButton").click(() =>{
-                
                 global_words = words;
                 if(isPlaying){
                     $("#actionButton").attr("src", "image/play.png");
@@ -65,7 +63,6 @@
                     $("#actionButton").attr("src", "image/stop.png");
                     console.log("Voice is playing");
                     isPlaying = true;
-                    
                     if (clicked ==  0){
                         msg = say(bodyWords);
                         speechSynthesis.speak(msg);
@@ -77,15 +74,12 @@
 
 
             });
+
+            //sets the speechSynthesis voice attributes based on settings and text
             function say(bodyWords){
                 console.log("inside say");
                 // let msg = new SpeechSynthesisUtterance();
                 let voices = window.speechSynthesis.getVoices();
-                console.log(voices)
-                for (let v in voices){
-                    console.log(`${v} ${voices[v].name}`)
-                }
-                console.log("voce style "+ settings.voiceStyle);
                 msg.voice = voices[settings.voiceStyle];
                 msg.voiceURI = "native";
                 msg.volume = 1;
@@ -97,25 +91,17 @@
                 // speechSynthesis.speak(msg);
 
             }
+
             let spanHTML= "";
+            //everytime the speech is triggered, the lastest words will be displayed on the screen
             msg.onboundary = async function(event){
-                
                 let selectBody = $("body");
-                // console.log("event "+ event);
-                console.log(jSpeakSpan.textContent)
-                let word = getWordAt(global_words[wordIndex], event.charIndex);
-                //drawTextInPanel(words);
-                // document.getElementById("word").innerHTML = word;
-                //console.log("word: "+ word);
-                // console.log("event.charIndex "+ event.charIndex);
-                // console.info("global word index "+global_words[wordIndex]);
-                //console.log("span index global "+ global_words[wordIndex]);
                 if(global_words[wordIndex] == null){
-                    console.log("UNDEFINED");
+                    // console.log("UNDEFINED");
                 }else{
                     if(global_words[wordIndex].includes(".")){
                         setTimeout(()=>{
-                            console.log("timeout");
+                            // console.log("timeout");
                             spanHTML += `<strong> ${global_words[wordIndex]}</strong>`
                             $("#jSpeakSpan").html(spanHTML);
                             wordIndex++;
@@ -131,32 +117,22 @@
 
                 }
                 count++;
-                console.log("global words: "+ global_words.length);
-                // console.log(count +"BOUNDARY");
-                // console.log(wordIndex +"wordIndex");
-                // if(wordIndex == global_words.length){
-                //     document.getElementById("actionButton").click();
-                // }
+                
             }
+            //when voice ends, click the stop button to trigger a reset
+            msg.onend = event => {
+                console.log("Finished speaking");
+                setTimeout(()=>{
+                    isPlaying = true;
+                    $("#actionButton").trigger("click");
 
-            function getWordAt(str, pos) {
-                // Perform type conversions.
-                str = String(str);
-                pos = Number(pos) >>> 0;
-            
-                // Search for the word's beginning and end.
-                var left = str.slice(0, pos + 1).search(/\S+$/),
-                    right = str.slice(pos).search(/\s/);
-            
-                // The last word in the string is a special case.
-                if (right < 0) {
-                    return str.slice(left);
-                }
-                // Return the word, using the located bounds to extract it from the string.
-                // console.log(str.slice(left, right + pos));
-                return str.slice(left, right + pos);
-            }
+                },500)
+             }
 
+            
+            //resets the array and the span that contains text in order to start from the beginning
+            //creates an array and removes newline characters and unwanted spaces
+            //sets isPlaying to false
             let resetEverything = () =>{
                 wordIndex = 0;
                 global_words = [];
@@ -165,9 +141,9 @@
                 spanHTML= "";
                 bodyWords = $.trim($(this).text());
                 $("#jSpeakSpan").html(jSpeakSpan)
-                console.log(bodyWords);
+                // console.log(bodyWords);
                 words = bodyWords.split(" ");
-                console.log(words);
+                // console.log(words);
                 function arrayRemove(arr, value){
                     return arr.filter(function(ele){
                         return ele != value;
@@ -179,7 +155,7 @@
                     words[w] = words[w].replace(/(\r\n|\n|\r)/gm, "");
                     // console.log(w);
                 }
-                console.log(words);
+                //console.log(words);
                 let isPlaying = false;
             }
 
